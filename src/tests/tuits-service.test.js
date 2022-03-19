@@ -131,16 +131,19 @@ describe('can retrieve all tuits with REST API', () => {
 
     const testTuits = [
         {
+            _id: "6200341b183f03369d71d023",
             tuit: "test tuit1",
             postedOn: new Date(),
         },
 
         {
+            _id: "6200341b183f03369d71d040",
             tuit: "test tuit2",
             postedOn: new Date(),
         },
 
         {
+            _id: "6200341b183f03369d71d020",
             tuit: "test tuit3",
             postedOn: new Date(),
         },
@@ -152,17 +155,15 @@ describe('can retrieve all tuits with REST API', () => {
     let testTuitIds = [];
     beforeAll(() => {
 
-        return createUser(sowell).then(testUser => Promise.all(testTuits.map(tempTuit => {
-            const response = createTuit(testUser._id,tempTuit);
-            testTuitIds.push(response._id);
-        })));
+        return Promise.all(testTuits.map(tempTuit => createTuit("5200341b183f03369d71d021",tempTuit)));
+
 
     });
 
-    afterAll(  () => {
+    afterAll( () => {
         //console.log(testTuitIds);
 
-        return deleteUsersByUsername(sowell.username).then(response => Promise.all(testTuitIds.map(tuitId => deleteTuit(tuitId.toString()))));
+        return Promise.all(testTuits.map(testTuit => deleteTuit(testTuit._id)));
     });
 
     test("can retrieve all tuits with REST API", async () => {
