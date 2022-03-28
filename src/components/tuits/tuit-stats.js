@@ -1,6 +1,7 @@
-import React from "react";
-import * as likesService from "../../services/likes-service";
+import React, {useState} from "react";
+
 import {findAllTuitsLikedByUser} from "../../services/likes-service";
+import {findAllTuitsDislikedByUser} from "../../services/dislikes-service";
 
 const TuitStats = ({tuit, likeTuit, dislikeTuit = () => {}}) => {
     const [isLiked, setIsLiked] = useState(false);
