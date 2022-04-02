@@ -70,7 +70,7 @@ describe('find users who disliked the tuit', () => {
         // remove any data we created, same service toggles the dislike
         await deleteUser(testUser._id);
         await deleteTuit(tuitId);
-        return userDislikesTuit(testUser._id,tuitId);
+        return await userDislikesTuit(testUser._id,tuitId);
     })
 
     test('Retrieve users who disliked a tuit ', async () => {

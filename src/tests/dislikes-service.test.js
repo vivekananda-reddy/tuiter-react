@@ -41,6 +41,7 @@ test('stats render correctly', () => {
     const dislikesText1 = dislikesCounter.children[1];
     expect(dislikesText1).toBe('201');
 
+
     const dislikeTuitDecrement = () => {
         act(() => {
             stats.dislikes--;
@@ -69,4 +70,32 @@ test('stats render correctly', () => {
     expect(dislikesTextDecrement).toBe('200');
 
 });
+
+test('tuits render', () => {
+
+    let tuitsJson = [
+        { "_id":  "123",
+            "tuit": "Alice's tuit"   },
+        { "_id":  "234",
+            "tuit": "Bob's tuit"     },
+        { "_id":  "345",
+            "tuit": "Charlie's tuit" }
+    ]
+
+    let tuitsRender
+    act(() => {
+        tuitsRender = create(
+            <HashRouter>
+            <Tuits
+                tuits={tuitsJson}/>
+            </HashRouter>
+        )
+    })
+    const root = tuitsRender.root
+    const ttrTuits = root.findAllByProps({className: 'ttr-tuit'})
+    expect(ttrTuits.length).toBe(tuitsJson.length)
+    ttrTuits.forEach((ttrTuit, ndx) => {
+        expect(ttrTuit.props.children).toBe(tuitsJson[ndx].tuit)
+    })
+})
 
