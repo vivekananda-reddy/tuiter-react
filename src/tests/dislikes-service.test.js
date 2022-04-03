@@ -3,7 +3,7 @@ import TuitStats from "../components/tuits/tuit-stats";
 import Tuits from "../components/tuits/index"
 import {HashRouter} from "react-router-dom";
 
-test('stats render correctly', () => {
+test('stats render correctly and checks toggle on dislike button', () => {
     let stats = {
         dislikes: 200,
         likes: 123,
@@ -71,31 +71,4 @@ test('stats render correctly', () => {
 
 });
 
-test('tuits render', () => {
-
-    let tuitsJson = [
-        { "_id":  "123",
-            "tuit": "Alice's tuit"   },
-        { "_id":  "234",
-            "tuit": "Bob's tuit"     },
-        { "_id":  "345",
-            "tuit": "Charlie's tuit" }
-    ]
-
-    let tuitsRender
-    act(() => {
-        tuitsRender = create(
-            <HashRouter>
-            <Tuits
-                tuits={tuitsJson}/>
-            </HashRouter>
-        )
-    })
-    const root = tuitsRender.root
-    const ttrTuits = root.findAllByProps({className: 'ttr-tuit'})
-    expect(ttrTuits.length).toBe(tuitsJson.length)
-    ttrTuits.forEach((ttrTuit, ndx) => {
-        expect(ttrTuit.props.children).toBe(tuitsJson[ndx].tuit)
-    })
-})
 
